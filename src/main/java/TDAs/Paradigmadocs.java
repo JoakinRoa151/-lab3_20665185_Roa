@@ -58,7 +58,23 @@ public class Paradigmadocs {
     public ArrayList<Acceso> getAccesos() {
         return accesos;
     }
+    // ---------------- Funciones Aux ----------- //
+    public boolean verificarAccesoEdicion(String nombreUsuario, int idDocumento){
+        for(int i=0;i<this.accesos.size();i++){
+            if(this.accesos.get(i).getIdDocumento()==idDocumento){
+                boolean existeUsuario = this.accesos.get(i).getNombresUsuarios().contains(nombreUsuario);
+                boolean existePermiso = this.accesos.get(i).getPermiso().contains("W");
+                if(existeUsuario && existePermiso){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
 
+        return false;
+    }
     // ---------------- Register ---------------- //
     public void Register(String nombreUsuario, String clave) {
         LocalDate fechaRegistro = LocalDate.now();
@@ -84,7 +100,7 @@ public class Paradigmadocs {
 
 
     // ---------------- LogOut ---------------- //
-    public void LogOut(String nombreUsuario, String clave) {
+    public void LogOut() {
         this.usuarioActivo = null;
     }
 
@@ -103,8 +119,42 @@ public class Paradigmadocs {
         }
     }
 
+    // ---------------- Share ---------------- //
+    public void Share(ArrayList<String> nombresUsuarios,int idDocumento, String permiso){
+        if (this.usuarioActivo != null) {
+           String propietarioDocumento= this.documentos.get(idDocumento-1).get(0).getUsuarioPropietario();
+            if(this.usuarioActivo.equals(propietarioDocumento)){
+               Acceso nuevoAcceso = new Acceso(idDocumento,nombresUsuarios,permiso);
+               this.accesos.add(nuevoAcceso);
+           }
+            else{
+                System.out.println("DEBE SER PROPIETARIO DEL DOCUMENTO PARA COMPARTIRLO!\n");
+            }
+        }
+        else {
+            System.out.println("PORFAVOR INICIE SESION ANTES DE COMPARTIR UN DOCUMENTO!\n");
+        }
 
+    }
+    // ---------------- Add ---------------- //
+    public void Add(int idDocumento, String contenidoAdicional){
+        if(this.usuarioActivo != null) {
+            String propietarioDocumento= this.documentos.get(idDocumento-1).get(0).getUsuarioPropietario();
+            if((this.usuarioActivo.equals(propietarioDocumento)) ||(this.verificarAccesoEdicion(this.usuarioActivo,idDocumento))){
+                LocalDate fechaEdicion = LocalDate.now();
+                int posicionUltimaVersion= (this.documentos.get(idDocumento-1).size())-1;
+                String nombreDocumento= this.documentos.get(idDocumento-1).get(posicionUltimaVersion).getNombreDocumento();
+                String contenidoDocumento= this.documentos.get(idDocumento-1).get(posicionUltimaVersion).getContenido();
+                String usuarioPropietario= this.documentos.get(idDocumento-1).get(posicionUltimaVersion).getUsuarioPropietario();
+                int idNuevaVersion= posicionUltimaVersion+1;
+                Documento nuevaVersion = new Documento(usuarioPropietario,idDocumento,idNuevaVersion,nombreDocumento,contenidoDocumento + contenidoAdicional
+                        , fechaEdicion);
+                this.documentos.get(idDocumento-1).add(nuevaVersion);
+            }
 
-
-
+        }
+        else {
+            System.out.println("PORFAVOR INICIE SESION ANTES DE EDITAR UN DOCUMENTO!\n");
+        }
+    }
 }

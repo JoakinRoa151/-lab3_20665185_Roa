@@ -1,6 +1,7 @@
 import TDAs.Paradigmadocs;
 import TDAs.Usuario;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -17,15 +18,31 @@ public class Main {
         gDocs0.Login("Joakin Roa","cometorta123");
         gDocs0.Create("Sobre Informatica","me gusta mucho el lenguaje java");
         gDocs0.Create("Sobre Informatica 2","No me gusta Prolog");
-        System.out.println(gDocs0.getDocumentos().get(1).get(0).getNombreDocumento() + "\n");
+        gDocs0.LogOut();
+        gDocs0.Login("Tomy Urra","Connor123");
+        gDocs0.Create("Sobre Musica","Muerte, mi nuevo single en spotify");
+        gDocs0.Create("Sobre Musica 2","Amo a los beatles");
+        gDocs0.LogOut();
+        gDocs0.Login("Pedro Marin","espacioregular123");
+        gDocs0.Create("Sobre Psicologia","Amo leer");
+        gDocs0.Create("Sobre Psicologia 2","psicoanalisis");
+        gDocs0.LogOut();
+        gDocs0.Login("Gonzalo soto","colocolo123");
+        gDocs0.Create("Sobre Tecnologia Medica","No se que se hace en esta carrera");
+        gDocs0.Create("Sobre Tecnologia Medica 2","prefiero ser musico");
+        gDocs0.LogOut();
+        gDocs0.Login("Daniel Manriquez","ponpon123");
+        gDocs0.Create("Sobre Derecho","Amo leerx2");
+        gDocs0.Create("Sobre Derecho","AbogadoManriquez");
+        gDocs0.LogOut();
+        /////////////////////////////////////////////////////////////////
+        gDocs0.Login("Joakin Roa","cometorta123");
+        ArrayList<String> nombres = new ArrayList<>();
+        nombres.add("Daniel Manriquez");
+        nombres.add("Gonzalo Soto");
+        gDocs0.Share(nombres,3,"W");
 
-
-
-
-
-
-
-
+        //System.out.println(gDocs0.getDocumentos().get(1).get(0).getNombreDocumento() + "\n");
         //System.out.println(gDocs0.getUsuarios().get(0).getID() + "\n");
         //gDocs0.Register("luchoSick","xd");
         //System.out.println(gDocs0.getUsuarios().get(1).getID() + "\n");
