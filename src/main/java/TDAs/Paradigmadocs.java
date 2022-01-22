@@ -7,33 +7,33 @@ import java.util.ArrayList;
 public class Paradigmadocs {
     private String nombre;
     private LocalDate fechaGdocs;
-    private ArrayList<Usuario> listaUsuarios;
-    private ArrayList<Documento> listaDocumentos;
+    private ArrayList<Usuario> usuarios;
+    private ArrayList<Documento> documentos;
     private String usuarioActivo;
-    private ArrayList<Acceso> listaAccesos;
+    private ArrayList<Acceso> accesos;
 
-    LocalDate fecha = LocalDate.now();
-
-    public Paradigmadocs(String nombre,LocalDate fecha) {
+    //LocalDate fecha = LocalDate.now();
+    // Constructores Paradigmadocs
+    public Paradigmadocs(String nombre,LocalDate fechaCreacion) {
         this.nombre = nombre;
-        this.fechaGdocs = fecha;
-        this.listaUsuarios = new ArrayList<>();
-        this.listaDocumentos = new ArrayList<>();
+        this.fechaGdocs = fechaCreacion;
+        this.usuarios = new ArrayList<>();
+        this.documentos = new ArrayList<>();
         this.usuarioActivo = null;
-        this.listaAccesos = new ArrayList<>();
+        this.accesos = new ArrayList<>();
     }
 
     public Paradigmadocs(String nombre, LocalDate fecha,
-                         ArrayList<Usuario> listaUsuarios, ArrayList<Documento>
-                                 listaDocumentos, String usuarioActivo, ArrayList<Acceso> listaAccesos) {
+                         ArrayList<Usuario> usuarios, ArrayList<Documento>
+                                 documentos, String usuarioActivo, ArrayList<Acceso> accesos) {
         this.nombre = nombre;
         this.fechaGdocs = fecha;
-        this.listaUsuarios = listaUsuarios;
-        this.listaDocumentos = listaDocumentos;
+        this.usuarios = usuarios;
+        this.documentos = documentos;
         this.usuarioActivo = usuarioActivo;
-        this.listaAccesos = listaAccesos;
+        this.accesos = accesos;
     }
-
+    // Getters Paradigmadocs
     public String getNombre() {
         return nombre;
     }
@@ -42,19 +42,40 @@ public class Paradigmadocs {
         return fechaGdocs;
     }
 
-    public ArrayList<Usuario> getListaUsuarios() {
-        return listaUsuarios;
+    public ArrayList<Usuario> getUsuarios() {
+        return usuarios;
     }
 
-    public ArrayList<Documento> getListaDocumentos() {
-        return listaDocumentos;
+    public ArrayList<Documento> getDocumentos() {
+        return documentos;
     }
 
     public String getUsuarioActivo() {
         return usuarioActivo;
     }
 
-    public ArrayList<Acceso> getListaAccesos() {
-        return listaAccesos;
+    public ArrayList<Acceso> getAccesos() {
+        return accesos;
     }
+    // ---------------- Register ---------------- //
+    public void Register(String nombreUsuario, String clave) {
+        LocalDate fechaRegistro = LocalDate.now();
+        int nuevoID= (this.usuarios.size()) + 1;
+        Usuario nuevoUsuario= new Usuario(nombreUsuario,clave,fechaRegistro,nuevoID);
+        if(nuevoUsuario.verificarUsuarioExistente(this.usuarios,nombreUsuario)){
+            this.usuarios.add(nuevoUsuario);
+        }
+        else{
+            System.out.println("NOMBRE DE USUARIO EXISTENTE, INGRESE UNO DISTINTO!\n");
+        }
+    }
+
+  /* // ---------------- Login ---------------- //
+    public void Login(String nombreUsuario, String clave){
+        if(true) {
+
+        }
+
+    }*/
+
 }

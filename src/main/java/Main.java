@@ -1,4 +1,5 @@
 import TDAs.Paradigmadocs;
+import TDAs.Usuario;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -8,7 +9,10 @@ public class Main {
         LocalDate auxFecha = LocalDate.now();
 
         Paradigmadocs gDocs0 = new Paradigmadocs("gDocs0",auxFecha);
-
+        gDocs0.Register("luchoSick","lolxd");
+        //System.out.println(gDocs0.getUsuarios().get(0).getID() + "\n");
+        //gDocs0.Register("luchoSick","xd");
+        //System.out.println(gDocs0.getUsuarios().get(1).getID() + "\n");
         System.out.println("### EDITOR COLABORATIVO ###\n" +
                 "## Registrado como: User123 ##\n" +
                 "Escoja su opción:\n" +

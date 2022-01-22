@@ -10,7 +10,7 @@ public class Documento {
     private String contenido;
     private LocalDate fechaCreacion;
 
-    LocalDate fecha= LocalDate.now();
+    //LocalDate fecha= LocalDate.now();
 
     public Documento(String usuarioPropietario, int idDocumento, int idVersion,
                      String nombreDocumento, String contenido, LocalDate fechaCreacion) {

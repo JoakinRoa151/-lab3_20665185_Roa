@@ -5,25 +5,25 @@ import java.util.ArrayList;
 
 public class Usuario {
     private String nombre;
-    private String contrasenia;
+    private String clave;
     private LocalDate fechaIngreso;
     private int ID;
 
-    LocalDate fecha= LocalDate.now();
-
-    public Usuario(String nombre, String contrasenia, LocalDate fecha, int ID) {
+    //LocalDate fecha= LocalDate.now();
+    // Constructor Usuario
+    public Usuario(String nombre, String clave, LocalDate fecha, int ID) {
         this.nombre = nombre;
-        this.contrasenia = contrasenia;
+        this.clave = clave;
         this.fechaIngreso = fecha;
         this.ID = ID;
     }
-
+    // Getters Usuario
     public String getNombre() {
         return nombre;
     }
 
-    public String getContrasenia() {
-        return contrasenia;
+    public String getClave() {
+        return clave;
     }
 
     public LocalDate getFechaIngreso() {
@@ -33,4 +33,30 @@ public class Usuario {
     public int getID() {
         return ID;
     }
+    // METODOS AUX //
+    public boolean verificarUsuarioExistente(ArrayList<Usuario> usuarios, String nombreUsuarioNuevo){
+        for(int i=0;i<usuarios.size();i++){
+            if(nombreUsuarioNuevo.equals((usuarios.get(i).getNombre()))){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean verificarIngresoUsuario(ArrayList<Usuario> usuarios, String nombreUsuarioIngresado, String claveIngresada){
+        for(int i=0;i<usuarios.size();i++){
+            if(nombreUsuarioIngresado.equals((usuarios.get(i).getNombre()))){
+                if(claveIngresada.equals(usuarios.get(i).getClave())){
+                    return true;
+
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
+
 }
