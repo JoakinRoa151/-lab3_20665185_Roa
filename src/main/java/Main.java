@@ -8,11 +8,16 @@ public class Main {
         System.out.println("sickLucho151\n");
         LocalDate auxFecha = LocalDate.now();
         Paradigmadocs gDocs0 = new Paradigmadocs("gDocs0",auxFecha);
-        gDocs0.Register("Mica Kordovero","Tib123");
-
-
-
-
+        //gDocs0.Register("Mica Kordovero","Tib123");
+        gDocs0.Register("Joakin Roa","cometorta123");
+        gDocs0.Register("Tomy Urra","Connor123");
+        gDocs0.Register("Pedro Marin","espacioregular123");
+        gDocs0.Register("Gonzalo soto","colocolo123");
+        gDocs0.Register("Daniel Manriquez","ponpon123");
+        gDocs0.Login("Joakin Roa","cometorta123");
+        gDocs0.Create("Sobre Informatica","me gusta mucho el lenguaje java");
+        gDocs0.Create("Sobre Informatica 2","No me gusta Prolog");
+        System.out.println(gDocs0.getDocumentos().get(1).get(0).getNombreDocumento() + "\n");
 
 
 

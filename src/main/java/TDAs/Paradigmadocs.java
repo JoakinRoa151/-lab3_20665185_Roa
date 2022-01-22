@@ -8,13 +8,13 @@ public class Paradigmadocs {
     private String nombre;
     private LocalDate fechaGdocs;
     private ArrayList<Usuario> usuarios;
-    private ArrayList<Documento> documentos;
+    private ArrayList<ArrayList<Documento>> documentos;
     private String usuarioActivo;
     private ArrayList<Acceso> accesos;
 
     //LocalDate fecha = LocalDate.now();
     // Constructores Paradigmadocs
-    public Paradigmadocs(String nombre,LocalDate fechaCreacion) {
+    public Paradigmadocs(String nombre, LocalDate fechaCreacion) {
         this.nombre = nombre;
         this.fechaGdocs = fechaCreacion;
         this.usuarios = new ArrayList<>();
@@ -24,7 +24,7 @@ public class Paradigmadocs {
     }
 
     public Paradigmadocs(String nombre, LocalDate fecha,
-                         ArrayList<Usuario> usuarios, ArrayList<Documento>
+                         ArrayList<Usuario> usuarios, ArrayList<ArrayList<Documento>>
                                  documentos, String usuarioActivo, ArrayList<Acceso> accesos) {
         this.nombre = nombre;
         this.fechaGdocs = fecha;
@@ -33,6 +33,7 @@ public class Paradigmadocs {
         this.usuarioActivo = usuarioActivo;
         this.accesos = accesos;
     }
+
     // Getters Paradigmadocs
     public String getNombre() {
         return nombre;
@@ -46,7 +47,7 @@ public class Paradigmadocs {
         return usuarios;
     }
 
-    public ArrayList<Documento> getDocumentos() {
+    public ArrayList<ArrayList<Documento>> getDocumentos() {
         return documentos;
     }
 
@@ -57,36 +58,53 @@ public class Paradigmadocs {
     public ArrayList<Acceso> getAccesos() {
         return accesos;
     }
+
     // ---------------- Register ---------------- //
     public void Register(String nombreUsuario, String clave) {
         LocalDate fechaRegistro = LocalDate.now();
-        int nuevoID= (this.usuarios.size()) + 1;
-        Usuario nuevoUsuario= new Usuario(nombreUsuario,clave,fechaRegistro,nuevoID);
-        if(nuevoUsuario.verificarUsuarioExistente(this.usuarios,nombreUsuario)){
+        int nuevoID = (this.usuarios.size()) + 1;
+        Usuario nuevoUsuario = new Usuario(nombreUsuario, clave, fechaRegistro, nuevoID);
+        if (nuevoUsuario.verificarUsuarioExistente(this.usuarios, nombreUsuario)) {
             this.usuarios.add(nuevoUsuario);
-        }
-        else{
+        } else {
             System.out.println("NOMBRE DE USUARIO EXISTENTE, INGRESE UNO DISTINTO!\n");
         }
     }
 
-   // ---------------- Login ---------------- //
-    public void Login(String nombreUsuario, String clave){
+    // ---------------- Login ---------------- //
+    public void Login(String nombreUsuario, String clave) {
         LocalDate fechaIngreso = LocalDate.now();
-        Usuario usuarioLogeado = new Usuario(nombreUsuario,clave);
-        if(usuarioLogeado.verificarIngresoUsuario(this.usuarios,nombreUsuario,clave)) {
-            this.usuarioActivo=nombreUsuario;
-        }
-        else {
+        Usuario usuarioLogeado = new Usuario(nombreUsuario, clave);
+        if (usuarioLogeado.verificarIngresoUsuario(this.usuarios, nombreUsuario, clave)) {
+            this.usuarioActivo = nombreUsuario;
+        } else {
             System.out.println("NOMBRE O CONTRASEÑA INCORRECTA!, PORFAVOR INTENTE NUEVAMENTE!\n");
         }
     }
 
 
     // ---------------- LogOut ---------------- //
-    public void LogOut(String nombreUsuario, String clave){
-        this.usuarioActivo=null;
+    public void LogOut(String nombreUsuario, String clave) {
+        this.usuarioActivo = null;
     }
+
+    // ---------------- Create ---------------- //
+    public void Create(String nombreDocumento, String contenido) {
+        if (this.usuarioActivo != null) {
+            LocalDate fechaCreacion = LocalDate.now();
+            int nuevoID = (this.documentos.size()) + 1;
+            Documento nuevoDocumento = new Documento(this.usuarioActivo,nuevoID,0,nombreDocumento,contenido,fechaCreacion);
+            ArrayList<Documento> nuevaListaVersiones= new ArrayList<>();
+            nuevaListaVersiones.add(nuevoDocumento);
+            this.documentos.add(nuevaListaVersiones);
+        }
+        else {
+            System.out.println("PORFAVOR INICIE SESION ANTES DE CREAR UN DOCUMENTO!\n");
+        }
+    }
+
+
+
 
 
 }
