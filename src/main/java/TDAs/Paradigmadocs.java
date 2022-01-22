@@ -70,12 +70,23 @@ public class Paradigmadocs {
         }
     }
 
-  /* // ---------------- Login ---------------- //
+   // ---------------- Login ---------------- //
     public void Login(String nombreUsuario, String clave){
-        if(true) {
-
+        LocalDate fechaIngreso = LocalDate.now();
+        Usuario usuarioLogeado = new Usuario(nombreUsuario,clave);
+        if(usuarioLogeado.verificarIngresoUsuario(this.usuarios,nombreUsuario,clave)) {
+            this.usuarioActivo=nombreUsuario;
         }
+        else {
+            System.out.println("NOMBRE O CONTRASEÑA INCORRECTA!, PORFAVOR INTENTE NUEVAMENTE!\n");
+        }
+    }
 
-    }*/
+
+    // ---------------- LogOut ---------------- //
+    public void LogOut(String nombreUsuario, String clave){
+        this.usuarioActivo=null;
+    }
+
 
 }

@@ -10,12 +10,18 @@ public class Usuario {
     private int ID;
 
     //LocalDate fecha= LocalDate.now();
-    // Constructor Usuario
+
+    // Constructores Usuario
     public Usuario(String nombre, String clave, LocalDate fecha, int ID) {
         this.nombre = nombre;
         this.clave = clave;
         this.fechaIngreso = fecha;
         this.ID = ID;
+    }
+    public Usuario(String nombre, String clave) {
+        this.nombre = nombre;
+        this.clave = clave;
+
     }
     // Getters Usuario
     public String getNombre() {
